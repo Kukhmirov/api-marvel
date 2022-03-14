@@ -1,8 +1,7 @@
-import { Component, Fragment } from 'react';
+import { Component } from 'react';
 import MarvelService from '../../servises/MarvelService';
 import Error from '../error/error';
 import Spinner from '../spinner/spinner';
-import FullInformation from '../full-information/fullInformation';
 
 import './randomList.css';
 

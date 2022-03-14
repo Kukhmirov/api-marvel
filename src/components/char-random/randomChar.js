@@ -25,11 +25,6 @@ class RandomChar extends Component{
         this.updateChar();
     }
 
-    componentWillUnmount(){
-        console.log(2);
-    }
-
-
     onError = () => {
         this.setState({
             loading: false,

@@ -1,0 +1,37 @@
+.sceleton__wrapper
+{
+    width: 80%;
+}
+.sceleton
+{
+    display: flex;
+    flex-direction: column;
+}
+.sceleton__header
+{
+    display: grid;
+    grid-template-columns: 40px auto;
+    column-gap: 10px;
+    align-items: center;
+    width: 100%;
+}
+.sceleton__circle
+{
+    width: 40px;
+    height: 40px;
+    background-color: #C4C4C4;
+    border-radius: 100%;
+}
+.sceleton__mini
+{
+    width: 100%;
+    height: 16px;
+    background-color: #C4C4C4;
+}
+.sceleton__block
+{
+    height: 35px;
+    width: 100%;
+    background-color: #C4C4C4;
+    margin-top: 15px;
+}
