@@ -1,0 +1,44 @@
+.fullCard
+{
+    position: relative;
+    width: 80%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0px 0px 12px 4px rgba(34, 60, 80, 0.25);
+}
+.fullCard__header
+{
+    display: flex;
+}
+.fullCard__img
+{
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+.fullCard__img img
+{
+    width: 100%;
+}
+.fullCard__title
+{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+.fullCard__name
+{
+    height: 80px;
+    font-weight: 700;
+    font-size: 22px;
+}
+.fullCard__btns
+{
+    position: relative;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
