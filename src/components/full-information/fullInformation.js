@@ -92,6 +92,7 @@ const View = ({char}) => {
         )
         
     })
+    
     const sceletonComics = comics.length !== 0 ? comicsList : "К сожалению информация о комиксах отсутствует";
     const sceletonDescription = description ? description : "К сожалению на данный момент информация отсутсвует";
 
