@@ -30,7 +30,6 @@ class FullInformation extends Component {
 
     updateChar = () => {
         const {charSelected} = this.props;
-        console.log(1)
         if(!charSelected){
             return;
         }
@@ -83,15 +82,24 @@ class FullInformation extends Component {
 }
 
 const View = ({char}) => {
-    const {thumbnail, name, homepage, wiki, description} = char;
+    const {thumbnail, name, homepage, wiki, description, comics} = char;
 
-    console.log(char)
+    const comicsList = comics.map((item, index) => {
+        // eslint-disable-next-line
+        if(index > 9)  return;
+        return (
+            <li key={index}><a href={item.resourceURI}>{item.name}</a></li>
+        )
+        
+    })
+    const sceletonComics = comics.length !== 0 ? comicsList : "К сожалению информация о комиксах отсутствует";
+    const sceletonDescription = description ? description : "К сожалению на данный момент информация отсутсвует";
 
     return (
         <div className="fullCard">
             <div className="fullCard__header">
                 <div className="fullCard__img">
-                    <img src={thumbnail} alt="img hero" />
+                    <img src={thumbnail} alt={name + `img`} />
                 </div>
                 <div className="fullCard__title">
                     <div className="fullCard__name">
@@ -108,9 +116,12 @@ const View = ({char}) => {
                 </div>
             </div>
             <div className="fullCard__descr">
-                {description}
+                {sceletonDescription}
             </div>
-            <div className="fullCard__items"></div> 
+            <ul className="fullCard__comics">
+                <div className="fullCard__name fullCard__name--comics">Comics</div>
+                {sceletonComics}
+            </ul> 
         </div> 
     )
 }
