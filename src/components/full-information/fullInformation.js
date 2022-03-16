@@ -4,7 +4,7 @@ import MarvelService from '../../servises/MarvelService'
 import Skeleton from '../skeleton/skeleton';
 import Error from '../error/error';
 import Spinner from '../spinner/spinner';
-import './fullInformation.css'
+import './fullInformation.css';
 
 
 class FullInformation extends Component {

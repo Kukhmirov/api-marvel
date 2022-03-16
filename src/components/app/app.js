@@ -2,6 +2,7 @@ import { Component } from 'react';
 import RandomChar from '../char-random/randomChar';
 import RandomList from '../random-list/randomList';
 import FullInformation from '../full-information/fullInformation';
+import ErrorBoundary from '../error-boundary/errorBoundary';
 
 import '../style/button.css'
 import '../random-list/randomList.css'
@@ -19,10 +20,16 @@ class App extends Component {
     render(){
         return(
             <div className="app">
-                <RandomChar/>
+                <ErrorBoundary>
+                    <RandomChar/>
+                </ErrorBoundary>
                 <div className="info">
-                    <RandomList onCharSelected={this.onCharSelected}/>
-                    <FullInformation charSelected={this.state.selectedChar}/>
+                    <ErrorBoundary>
+                        <RandomList onCharSelected={this.onCharSelected}/>
+                    </ErrorBoundary>
+                    <ErrorBoundary>
+                        <FullInformation charSelected={this.state.selectedChar}/>
+                    </ErrorBoundary>
                 </div>
                 
             </div>
