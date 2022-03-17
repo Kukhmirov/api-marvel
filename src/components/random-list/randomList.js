@@ -8,27 +8,52 @@ import './randomList.css';
 class RandomList extends Component {
     state = {
         charList: [],
-        countCard: 12,
         loading: true,
-        error: false
+        error: false,
+        newItemLoading: false,
+        offset: 200,
+        charEnd: false
     }
 
     marvelService = new MarvelService();
 
     componentDidMount(){
-        this.marvelService.getAllCharacters()
-                          .then(res => this.onCharListLoaded(res))
+        this.onRequest();
     }
 
-    onCharListLoaded(charList) {
+    onCharListLoaded(newCharList) {
+        let end = false;
+        if(newCharList.length < 9){
+            end = true;
+        }
+
+        this.setState(({charList, offset}) => ({
+            charList: [...charList, ...newCharList],
+            loading: false,
+            newItemLoading: false,
+            offset: offset + 9,
+            charEnd: end
+        }));
+    }
+
+    onRequest = (offset) => {
+        this.onCharListLoading();
+        this.marvelService.getAllCharacters(offset)
+            .then(res => this.onCharListLoaded(res))
+            .catch(this.onError)
+    }
+
+    onError = () => {
         this.setState({
-            charList,
+            error: true,
             loading: false
-        });
+        })
     }
 
-    addCardCount = () => {
-        this.setState(({countCard: this.state.countCard + 4}))
+    onCharListLoading = () => {
+        this.setState({
+            newItemLoading: true
+        })
     }
 
     renderItems(arr){
@@ -44,6 +69,7 @@ class RandomList extends Component {
                 </li>
             )
         });
+
         return (
             <ul className='info__card'>
                 {items}
@@ -52,20 +78,24 @@ class RandomList extends Component {
     }
 
     render(){
-        const {charList, error, loading} = this.state;
+        const {charList, error, loading, newItemLoading, offset, charEnd} = this.state;
 
         const items = this.renderItems(charList);
 
         const errorMessage = error? <Error/> : null;
         const spinner = loading ? <Spinner/> : null;
         const content = !(loading || error) ? items : null;
-
+        
         return(
             <div className='info__wrapper'>
                 {errorMessage}
                 {spinner}
                 {content}
-                <button className='button button__main' onClick={this.addCardCount}>
+                <button 
+                    className='button button__list' 
+                    disabled={newItemLoading}
+                    style={{'display': charEnd? 'none' : 'block'}}
+                    onClick={() => this.onRequest(offset)}>
                     <div className="inner">add</div>
                 </button>
             </div>
